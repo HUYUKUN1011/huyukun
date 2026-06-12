@@ -1,27 +1,57 @@
 ---
 name: 班级申请审批
-description: 自动审批中英文班级申请邮件，搜索主题含"中英"的邮件，以回复形式标记已读并回复确认（含抄送），保存到已发送
+description: 自动审批中英文班级申请邮件，搜索主题含“中英”的邮件，以回复形式标记已读并回复确认，支持抄送并保存到已发送。
 ---
 
+## 资产治理信息
+
+| 项目 | 内容 |
+| --- | --- |
+| 所属团队 | 教学 |
+| 负责人 | 胡煜坤 |
+| 备份负责人 | 待补充 |
+| 最近维护日期 | 2026-06-12 |
+| 治理状态 | partial_governed |
+
+当前文件保留为“班级申请审批”技能说明。该资产仍需补齐或关联实际脚本 `approve-class-emails.ps1`，并补充 dry-run 或最小验证方式；在脚本未入库前，治理状态保持 `partial_governed`。
+
 ## 功能
-- 连接腾讯企业邮箱 IMAP，扫描近30天邮件
-- 搜索主题含关键词（默认"中英"）的邮件
-- 自动标记已读/已回复
-- 以 **回复形式**（In-Reply-To + References 头）发送审批回复，在客户端显示为原邮件回复
-- 自动 **抄送** ruiyu.zong@hltn.com, jian.chen@hltn.com
-- 保存回复到"Sent Messages"已发送文件夹
+
+- 连接腾讯企业邮箱 IMAP，扫描近 30 天邮件。
+- 搜索主题含关键词的邮件，默认关键词为“中英”。
+- 自动标记邮件为已读/已回复。
+- 以回复形式发送审批确认，包含 `In-Reply-To` 和 `References` 邮件头，便于客户端显示为原邮件回复。
+- 支持自动抄送指定审批相关人员。
+- 保存回复到已发送文件夹。
 
 ## 使用前提
-- 需要 **IMAP/SMTP 授权码**（登录网页版邮箱 → 设置 → 邮箱绑定 → 生成新密码）
-- IMAP: imap.exmail.qq.com:993 (SSL)
-- SMTP: smtp.exmail.qq.com:465 (SSL)
+
+- 需要 IMAP/SMTP 授权码。授权码不是邮箱登录密码。
+- IMAP：`imap.exmail.qq.com:993`，SSL。
+- SMTP：`smtp.exmail.qq.com:465`，SSL。
+- 后续应补充 `.env.example` 或参数示例，避免真实授权码进入仓库。
 
 ## 运行
+
+计划关联脚本：
+
 ```powershell
 .\approve-class-emails.ps1 -Email "your@company.com" -AuthCode "your_code" -Keyword "中英"
 ```
 
 ## 参数
-- `-Email`: 邮箱地址
-- `-AuthCode`: IMAP/SMTP 授权码（不是登录密码）
-- `-Keyword`: 搜索关键词，默认 "class application"
+
+- `-Email`：邮箱地址。
+- `-AuthCode`：IMAP/SMTP 授权码。
+- `-Keyword`：搜索关键词，默认建议为“中英”。
+
+## 安全边界
+
+不得提交以下内容：
+
+- 真实邮箱授权码、密码、cookie 或邮件会话信息。
+- 真实审批邮件内容、附件、内部学生或班级信息。
+- 不应公开的抄送人名单和内部审批规则。
+- 本地运行日志、邮件导出文件或截图。
+
+公开说明中只能使用示例邮箱、示例授权码和脱敏规则。
