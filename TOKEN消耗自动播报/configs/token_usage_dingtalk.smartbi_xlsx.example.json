@@ -1,0 +1,70 @@
+{
+  "source": {
+    "type": "xlsx",
+    "path": "inputs/token_usage/海外员工AI消耗监控.xlsx",
+    "timezone": "Asia/Shanghai",
+    "lookback_days": 1,
+    "sheet": "",
+    "header_row": 1,
+    "date_column": "日期",
+    "name_column": "姓名",
+    "id_column": "",
+    "total_tokens_column": "token消耗",
+    "amount_column": "金额",
+    "input_tokens_column": "",
+    "output_tokens_column": "",
+    "requests_column": "调用次数",
+    "column_aliases": {
+      "date_column": [
+        "日期",
+        "统计日期",
+        "使用日期"
+      ],
+      "name_column": [
+        "姓名",
+        "员工姓名",
+        "员工",
+        "使用人",
+        "用户",
+        "成员",
+        "人员"
+      ],
+      "total_tokens_column": [
+        "token消耗",
+        "tokens消耗",
+        "总token",
+        "总tokens",
+        "消耗token",
+        "消耗tokens",
+        "总消耗"
+      ],
+      "requests_column": [
+        "调用次数",
+        "请求次数",
+        "requests"
+      ]
+    }
+  },
+  "thresholds": {
+    "metric": "amount",
+    "min_amount": 100,
+    "min_total_tokens": 100,
+    "include_zero_usage": true
+  },
+  "members": [],
+  "dingtalk": {
+    "mode": "current_user",
+    "group_open_conversation_id": "",
+    "title": "每日 AI 金额消耗提醒",
+    "send_when_all_ok": true,
+    "max_detail_rows": 30,
+    "image_delivery": "markdown_upload",
+    "cleanup_uploaded_images": true,
+    "uploaded_image_retention_hours": 168,
+    "uploaded_image_name_prefix": "token-usage-",
+    "dws_command": "dws"
+  },
+  "outputs": {
+    "dir": "outputs/token_usage_reports"
+  }
+}
