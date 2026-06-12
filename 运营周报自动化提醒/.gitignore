@@ -1,6 +1,0 @@
-*.local.json
-*.secret.json
-operation_weekly_report_automation.config.json
-weekly_report_automation.config.json
-operation_next_week_draft.json
-*.log
