@@ -1,0 +1,115 @@
+{
+  "source": {
+    "type": "smartbi_task",
+    "smartbi_config": "configs/token_usage_smartbi_tasks.local.json",
+    "task": "overseas_employee_ai_usage_monitor",
+    "daily_zero_task": "overseas_employee_ai_usage_monitor_today",
+    "timezone": "Asia/Shanghai",
+    "lookback_days": 1,
+    "parse": {
+      "format": "smartbi_pivot",
+      "sheet": "",
+      "data_start_row": 7,
+      "name_column_index": 4,
+      "total_tokens_column_index": 5,
+      "requests_column_index": 6,
+      "amount_column_index": 7,
+      "token_multiplier": 1000000,
+      "header_row": 1,
+      "date_column": "日期",
+      "name_column": "姓名",
+      "id_column": "",
+      "total_tokens_column": "token消耗",
+      "input_tokens_column": "",
+      "output_tokens_column": "",
+      "requests_column": "调用次数",
+      "column_aliases": {
+        "date_column": [
+          "日期",
+          "统计日期",
+          "使用日期"
+        ],
+        "name_column": [
+          "姓名",
+          "员工姓名",
+          "员工",
+          "使用人",
+          "用户",
+          "成员",
+          "人员"
+        ],
+        "id_column": [
+          "usage_id",
+          "user_id",
+          "用户id",
+          "员工id",
+          "账号",
+          "邮箱",
+          "工号"
+        ],
+        "total_tokens_column": [
+          "token消耗",
+          "tokens消耗",
+          "总token",
+          "总tokens",
+          "消耗token",
+          "消耗tokens",
+          "总消耗"
+        ],
+        "input_tokens_column": [
+          "输入token",
+          "输入tokens",
+          "input_tokens"
+        ],
+        "output_tokens_column": [
+          "输出token",
+          "输出tokens",
+          "output_tokens"
+        ],
+        "requests_column": [
+          "调用次数",
+          "请求次数",
+          "requests"
+        ]
+      }
+    }
+  },
+  "thresholds": {
+    "metric": "amount",
+    "min_amount": 100,
+    "min_total_tokens": 100,
+    "include_zero_usage": true
+  },
+  "members": [
+    {
+      "name": "张三",
+      "usage_id": "张三",
+      "open_dingtalk_id": "",
+      "enabled": true
+    },
+    {
+      "name": "李四",
+      "usage_id": "李四",
+      "open_dingtalk_id": "",
+      "enabled": true
+    }
+  ],
+  "dingtalk": {
+    "mode": "current_user",
+    "group_open_conversation_id": "",
+    "title": "每日 AI 金额消耗提醒",
+    "send_when_all_ok": true,
+    "max_detail_rows": 30,
+    "image_delivery": "markdown_upload",
+    "cleanup_uploaded_images": true,
+    "delete_current_uploaded_image": false,
+    "uploaded_image_retention_hours": 168,
+    "uploaded_image_name_prefix": "token-usage-",
+    "uploaded_image_max_cleanup": 20,
+    "uploaded_image_cleanup_max_pages": 5,
+    "dws_command": "dws"
+  },
+  "outputs": {
+    "dir": "outputs/token_usage_reports"
+  }
+}
