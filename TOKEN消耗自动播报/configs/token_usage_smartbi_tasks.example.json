@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "base_url": "https://bi.61info.cn/smartbi/vision",
+  "tasks": {
+    "overseas_employee_ai_usage_monitor": {
+      "enabled": false,
+      "description": "海外员工AI消耗监控，月查询口径。填入真实 report.id 后启用。",
+      "report": {
+        "id": "<填入海外员工AI消耗监控的SmartBI报表ID>",
+        "path": "分析报表/海外直播业务线/填报/海外经营/海外员工AI消耗监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "current_month_snapshot",
+        "overrides": [
+          {
+            "key": "时间维度",
+            "value": "月查询",
+            "displayValue": "月"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    },
+    "overseas_employee_ai_usage_monitor_today": {
+      "enabled": false,
+      "description": "海外员工AI消耗监控，当日 0 消耗点名口径。填入真实 report.id 后启用。",
+      "report": {
+        "id": "<填入海外员工AI消耗监控的SmartBI报表ID>",
+        "path": "分析报表/海外直播业务线/填报/海外经营/海外员工AI消耗监控",
+        "type": "SPREADSHEET_REPORT"
+      },
+      "filters": {
+        "date_window": "current_day",
+        "overrides": [
+          {
+            "key": "时间维度",
+            "value": "日查询",
+            "displayValue": "日"
+          }
+        ]
+      },
+      "output": {
+        "type": "file",
+        "dir": "outputs/bi_exports/{task}/{run_date}"
+      }
+    }
+  }
+}
